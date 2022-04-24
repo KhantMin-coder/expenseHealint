@@ -1,7 +1,4 @@
-$backgroundColor: #1f2029;
-$backDropColor: #353746;
-$primaryColor: #d93d52;
-$secondaryColor: #82ca9d;
+@use "./styles/colors" as *;
 
 body {
   background-color: $backgroundColor;
