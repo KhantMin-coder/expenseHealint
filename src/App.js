@@ -1,4 +1,7 @@
 import "./App.scss";
+import LineChartComponent from "./components/LineChartComponent";
+import { data } from "./assets/dummy";
+import DonutChartComponent from "./components/DonutChartComponent";
 
 function App() {
   return (
@@ -7,9 +10,11 @@ function App() {
         <div className="grid">
           <div className="grid-item grid-item-1">
             <h3>Monthly Data</h3>
+            <LineChartComponent data={data} />
           </div>
           <div className="grid-item grid-item-2">
             <h3>Expense Category</h3>
+            <DonutChartComponent data={data} />
           </div>
           <div className="grid-item grid-item-3">
             <h3>Add New Expenses</h3>
