@@ -6,6 +6,7 @@ import moment from "moment";
 import DonutChartComponent from "./components/DonutChartComponent";
 import BarChartComponent from "./components/BarChartComponent";
 import ExpenseForm from "./components/ExpenseForm";
+import Table from "./components/Table";
 
 function App() {
   const [data, setData] = useState(dummyData);
@@ -159,9 +160,9 @@ function App() {
               barChartData={barChartData}
             />
           </div>
-
           <div className="grid-item grid-item-5">
-            <p>Table </p>
+            <p>Table</p>
+            <Table TD={data} />
           </div>
         </div>
       </div>
