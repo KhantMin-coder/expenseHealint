@@ -3,6 +3,7 @@ import LineChartComponent from "./components/LineChartComponent";
 import { data } from "./assets/dummy";
 import DonutChartComponent from "./components/DonutChartComponent";
 import BarChartComponent from "./components/BarChartComponent";
+import ExpenseForm from "./components/ExpenseForm";
 
 function App() {
   return (
@@ -13,18 +14,22 @@ function App() {
             <h3>Monthly Data</h3>
             <LineChartComponent data={data} />
           </div>
+
           <div className="grid-item grid-item-2">
             <h3>Expense Category</h3>
             <DonutChartComponent data={data} />
           </div>
+
           <div className="grid-item grid-item-3">
             <h3>Add New Expenses</h3>
-
+            <ExpenseForm />
           </div>
+
           <div className="grid-item grid-item-4">
             <h4>Daily Expenses</h4>
-            <BarChartComponent data={data}/>
+            <BarChartComponent data={data} />
           </div>
+
           <div className="grid-item grid-item-5">
             <p>Table </p>
           </div>
