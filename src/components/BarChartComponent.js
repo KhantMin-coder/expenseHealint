@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-const BarChartComponent = ({ data }) => {
+const BarChartComponent = ({ barChartData, barChartLabel }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -38,19 +38,11 @@ const BarChartComponent = ({ data }) => {
       <Bar
         options={options}
         data={{
-          labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-          ],
+          labels: barChartLabel,
           datasets: [
             {
               label: "Expense",
-              data: [20, 500, 400, 250, 300, 200, 100],
+              data: barChartData,
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
           ],

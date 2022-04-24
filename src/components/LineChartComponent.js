@@ -21,18 +21,9 @@ ChartJS.register(
   Legend
 );
 
-const LineChartComponent = ({ data }) => {
-  const [labelData, setLabelData] = React.useState([]);
-  const [dataSet, setDataSet] = React.useState([]);
+const LineChartComponent = ({ lineChartLabels, lineChartData }) => {
 
-  useEffect(() => {
-    let eg1 = ["jan", "feb", "mar", "apr"];
-    let eg2 = [4000, 2000, 500, 1000];
-    setLabelData(eg1);
-    setDataSet(eg2);
-  }, []);
 
-  const [lineData, setLineData] = React.useState({});
 
   const options = {
     responsive: true,
@@ -52,11 +43,11 @@ const LineChartComponent = ({ data }) => {
       <Line
         options={options}
         data={{
-          labels: labelData,
+          labels: lineChartLabels,
           datasets: [
             {
               label: "Expense",
-              data: dataSet,
+              data: lineChartData,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
