@@ -10,6 +10,7 @@ import Table from "./components/Table";
 
 function App() {
   const [data, setData] = useState(dummyData);
+  // const [data, setData] = useState([]);
 
   const [lineChartLabels, setLineChartLabels] = useState([]);
   const [lineChartData, setLineChartData] = useState([]);
@@ -117,7 +118,7 @@ function App() {
     let barChartData = lastWeekGroups.map((item) => item.total);
     setBarChartLabel(barChartLabel);
     setBarChartData(barChartData);
-  }, []);
+  }, [data]);
 
   const getLastWeek = () => {
     let lastWeek = [];
@@ -150,7 +151,7 @@ function App() {
 
           <div className="grid-item grid-item-3">
             <h3>Add New Expenses</h3>
-            <ExpenseForm />
+            <ExpenseForm data={data} setData={setData} />
           </div>
 
           <div className="grid-item grid-item-4">

@@ -1,29 +1,47 @@
 import "./ExpenseForm.scss";
 import React from "react";
 import { useFormik } from "formik";
+import moment from "moment";
 import * as Yup from "yup";
 
-const SignupSchema = Yup.object().shape({
+const ExpenseSchema = Yup.object().shape({
   expenseName: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Expense Name is required"),
   amount: Yup.number().min(1).required("Expense Amount is required"),
   category: Yup.string()
-    .oneOf(["designer", "development", "product", "other"], "Invalid Job Type")
+    .oneOf(
+      ["Food", "Utilities", "Entertainment", "Donations", "Others"],
+      "Invalid Category Type"
+    )
     .required("Required"),
 });
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ data, setData }) => {
+  const createNewExpense = (values) => {
+    let newExpense = {
+      id: data.length + 1,
+      expenseName: values.expenseName,
+      expense: values.amount,
+      category: values.category,
+      date: moment().format("DD/MM/YYYY"),
+    };
+
+    setData([...data, newExpense]);
+  };
+
   const formik = useFormik({
     initialValues: {
       expenseName: "",
       amount: 0,
       category: "",
     },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    validationSchema: ExpenseSchema,
+    onSubmit: (values, { resetForm }) => {
+      createNewExpense(values);
+      resetForm();
+      // alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -67,13 +85,28 @@ const ExpenseForm = () => {
         <option value="" label="Select a category">
           Select a category
         </option>
+        <option value="Food" label="Food">
+          Food
+        </option>
+        <option value="Utilities" label="Utilities">
+          Utilities
+        </option>
+        <option value="Entertainment" label="Entertainment">
+          Entertainment
+        </option>
+        <option value="Donations" label="Donations">
+          Donations
+        </option>
+        <option value="Others" label="Others">
+          Others
+        </option>
       </select>
       {formik.errors.category ? (
         <div className="errorText">{formik.errors.category}</div>
       ) : null}
 
       <button className="button" type="submit">
-        Submit
+        Create New Expense
       </button>
     </form>
   );

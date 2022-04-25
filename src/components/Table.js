@@ -1,9 +1,14 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Pagination from "../components/Pagination";
 
 const Table = ({ TD }) => {
-  let [tableData, setTableData] = useState(TD);
+  let [tableData, setTableData] = useState(TD.slice(0).reverse());
   let [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    let updatedTD = TD.slice(0).reverse()
+    setTableData(updatedTD);
+  }, [TD]);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * 10;
