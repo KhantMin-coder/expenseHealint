@@ -1,0 +1,39 @@
+.delExpForm {
+  &-heading {
+    color: orangered;
+  }
+
+  &-inputField {
+    width: 200px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  &-button {
+    width: 100px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size: 14px;
+
+    color: white;
+    outline: none;
+
+    &-active {
+      border: 1px solid red;
+      background-color: red;
+    }
+    &-inactive {
+      border: 1px solid gainsboro;
+      background-color: gainsboro;
+    }
+  }
+}

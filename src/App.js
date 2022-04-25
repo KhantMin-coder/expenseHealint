@@ -14,10 +14,12 @@ import {
   calculateMonthlyData,
   calculateLast7DaysData,
 } from "./utils/GraphDataCalculations";
+import DeleteExpenseForm from "./components/Forms/DeleteExpenseForm";
 
 function App() {
   const [data, setData] = useState(dummyData);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [deleteModalData, setDeleteModalData] = useState({});
 
   const [lineChartLabels, setLineChartLabels] = useState([]);
   const [lineChartData, setLineChartData] = useState([]);
@@ -45,10 +47,21 @@ function App() {
     setBarChartData(barChartData);
   }, [data]);
 
+  const showDeleteOperation = (expense) => {
+    setDeleteModalData(expense);
+    setIsOpenModal(true);
+  };
+
+  const handleDelete = () => {
+    const newData = data.filter((expense) => expense.id !== deleteModalData.id);
+    setData(newData);
+    setIsOpenModal(false);
+  };
+
   return (
     <div className="App">
       <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
-        <h1>This is the modal</h1>
+        <DeleteExpenseForm data={deleteModalData} handleDelete={handleDelete} />
       </Modal>
       <div className="container">
         <div className="grid">
@@ -82,7 +95,7 @@ function App() {
           </div>
           <div className="grid-item grid-item-5">
             <h4>Expense Table</h4>
-            <Table TD={data} setIsOpenModal={setIsOpenModal} />
+            <Table TD={data} showDeleteOperation={showDeleteOperation} />
           </div>
         </div>
       </div>
