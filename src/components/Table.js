@@ -2,11 +2,12 @@ import React, { useState, useMemo, useEffect } from "react";
 import Pagination from "../components/Pagination";
 
 const Table = ({ TD }) => {
-  let [tableData, setTableData] = useState(TD);
+  let [tableData, setTableData] = useState(TD.slice(0).reverse());
   let [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    setTableData(TD);
+    let updatedTD = TD.slice(0).reverse()
+    setTableData(updatedTD);
   }, [TD]);
 
   const currentTableData = useMemo(() => {
