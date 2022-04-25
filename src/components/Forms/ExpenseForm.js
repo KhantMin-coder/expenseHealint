@@ -6,8 +6,8 @@ import * as Yup from "yup";
 
 const ExpenseSchema = Yup.object().shape({
   expenseName: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
+    .min(3, "Too Short!")
+    .max(30, "Too Long!")
     .required("Expense Name is required"),
   amount: Yup.number().min(1).required("Expense Amount is required"),
   category: Yup.string()
