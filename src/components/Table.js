@@ -1,24 +1,26 @@
 import React, { useState, useMemo, useEffect } from "react";
+import "./Table.scss";
 import Pagination from "../components/Pagination";
 
-const Table = ({ TD }) => {
+const Table = ({ TD, setIsOpenModal }) => {
   let [tableData, setTableData] = useState(TD.slice(0).reverse());
+  let [currentTableData, setcurrentTableData] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    let updatedTD = TD.slice(0).reverse()
+    // Reverse the data to show the latest data
+    let updatedTD = TD.slice(0).reverse();
     setTableData(updatedTD);
-  }, [TD]);
 
-  const currentTableData = useMemo(() => {
+    // Calcualte the current page data
     const firstPageIndex = (currentPage - 1) * 10;
     const lastPageIndex = firstPageIndex + 10;
-    return tableData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+    setcurrentTableData(updatedTD.slice(firstPageIndex, lastPageIndex));
+  }, [TD, currentPage]);
 
   return (
     <div>
-      <table style={{ width: "100%" }}>
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -29,7 +31,7 @@ const Table = ({ TD }) => {
           </tr>
         </thead>
         <tbody>
-          {currentTableData.map((expenses) => {
+          {currentTableData.map((expenses, index) => {
             return (
               <tr key={expenses.id}>
                 <td>{expenses.id}</td>
@@ -37,7 +39,7 @@ const Table = ({ TD }) => {
                 <td>{expenses.expense}</td>
                 <td>{expenses.category}</td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={() => setIsOpenModal(true)}>Edit</button>
                   <button>Delete</button>
                 </td>
               </tr>

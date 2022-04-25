@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
-import LineChartComponent from "./components/LineChartComponent";
 import { data as dummyData } from "./assets/dummy";
-import moment from "moment";
-import DonutChartComponent from "./components/DonutChartComponent";
-import BarChartComponent from "./components/BarChartComponent";
-import ExpenseForm from "./components/ExpenseForm";
+
+import ExpenseForm from "./components/Forms/ExpenseForm";
 import Table from "./components/Table";
+import Modal from "./components/Modal";
+
+import LineChartComponent from "./components/Charts/LineChartComponent";
+import DonutChartComponent from "./components/Charts/DonutChartComponent";
+import BarChartComponent from "./components/Charts/BarChartComponent";
+import {
+  calculateCategoryData,
+  calculateMonthlyData,
+  calculateLast7DaysData,
+} from "./utils/GraphDataCalculations";
 
 function App() {
   const [data, setData] = useState(dummyData);
-  // const [data, setData] = useState([]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const [lineChartLabels, setLineChartLabels] = useState([]);
   const [lineChartData, setLineChartData] = useState([]);
@@ -21,116 +28,28 @@ function App() {
   const [barChartLabel, setBarChartLabel] = useState([]);
   const [barChartData, setBarChartData] = useState([]);
 
-  const possibleMonthStrings = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
   useEffect(() => {
     // Calculate Line Data
-    let monthGroup = data.reduce(function (r, o) {
-      var m = o.date.split("/")[1];
-      r[m] ? r[m].push(o) : (r[m] = []);
-      return r;
-    }, {});
-
-    let tableData = [];
-    for (const key in monthGroup) {
-      tableData.push({
-        key: key,
-        name: possibleMonthStrings[Number(key) - 1],
-        total: monthGroup[key].reduce(function (acc, obj) {
-          return acc + obj.expense;
-        }, 0),
-      });
-    }
-
-    tableData = tableData.sort((a, b) => Number(a.key) - Number(b.key));
-    let lineNameArray = [];
-    let lineDataArray = [];
-    for (let i = 0; i < tableData.length; i++) {
-      lineNameArray.push(tableData[i].name);
-      lineDataArray.push(tableData[i].total);
-    }
-
+    const { lineNameArray, lineDataArray } = calculateMonthlyData(data);
     setLineChartLabels(lineNameArray);
     setLineChartData(lineDataArray);
 
     // Calculate Expense Category Data
-    let categroies = data.reduce(function (r, o) {
-      var cate = o.category;
-      r[cate] ? r[cate].push(o) : (r[cate] = []);
-      return r;
-    }, {});
-
-    let categroryData = [];
-    for (const key in categroies) {
-      categroryData.push({
-        name: key,
-        total: categroies[key].reduce(function (acc, obj) {
-          return acc + obj.expense;
-        }, 0),
-      });
-    }
-
-    let donutNameArray = categroryData.map((item) => item.name);
-    let donutDataArray = categroryData.map((item) => item.total);
+    const { donutNameArray, donutDataArray } = calculateCategoryData(data);
     setDonutChartLabel(donutNameArray);
     setDonutChartData(donutDataArray);
 
     // Calcuate Last 7 days data;
-    let lastWeek = getLastWeek();
-
-    let lastWeekData = data.filter((e) => {
-      return lastWeek.includes(e.date);
-    });
-
-    let lastWeekGroups = [];
-    for (let i = 0; i < lastWeek.length; i++) {
-      let wantedString =
-        lastWeek[i].split("/")[0] + "/" + lastWeek[i].split("/")[1];
-      lastWeekGroups.push({
-        date: lastWeek[i],
-        displayDate: wantedString,
-        total: 0,
-      });
-    }
-
-    lastWeekData.forEach((e, i) => {
-      lastWeekGroups.forEach((e2, i2) => {
-        if (e.date === e2.date) {
-          lastWeekGroups[i2].total += e.expense;
-        }
-      });
-    });
-
-    let barChartLabel = lastWeekGroups.map((item) => item.date);
-    let barChartData = lastWeekGroups.map((item) => item.total);
+    const { barChartLabel, barChartData } = calculateLast7DaysData(data);
     setBarChartLabel(barChartLabel);
     setBarChartData(barChartData);
   }, [data]);
 
-  const getLastWeek = () => {
-    let lastWeek = [];
-    for (let i = 0; i < 7; i++) {
-      let date = moment().subtract(i, "days");
-      lastWeek.push(date.format("DD/MM/YYYY"));
-    }
-    return lastWeek;
-  };
-
   return (
     <div className="App">
+      <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
+        <h1>This is the modal</h1>
+      </Modal>
       <div className="container">
         <div className="grid">
           <div className="grid-item grid-item-1">
@@ -162,8 +81,8 @@ function App() {
             />
           </div>
           <div className="grid-item grid-item-5">
-            <p>Table</p>
-            <Table TD={data} />
+            <h4>Expense Table</h4>
+            <Table TD={data} setIsOpenModal={setIsOpenModal} />
           </div>
         </div>
       </div>
