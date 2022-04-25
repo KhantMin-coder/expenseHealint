@@ -1,9 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Pagination from "../components/Pagination";
 
 const Table = ({ TD }) => {
   let [tableData, setTableData] = useState(TD);
   let [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setTableData(TD);
+  }, [TD]);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * 10;
