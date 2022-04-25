@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import "./Table.scss";
 import Pagination from "../components/Pagination";
 
-const Table = ({ TD, setIsOpenModal }) => {
+const Table = ({ TD, showDeleteOperation }) => {
   let [tableData, setTableData] = useState(TD.slice(0).reverse());
   let [currentTableData, setcurrentTableData] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
@@ -39,8 +39,10 @@ const Table = ({ TD, setIsOpenModal }) => {
                 <td>{expenses.expense}</td>
                 <td>{expenses.category}</td>
                 <td>
-                  <button onClick={() => setIsOpenModal(true)}>Edit</button>
-                  <button>Delete</button>
+                  <button>Edit</button>
+                  <button onClick={() => showDeleteOperation(expenses)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
