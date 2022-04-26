@@ -2100,10 +2100,3 @@ const data = [
     date: "25/04/2022",
   },
 ];
-
-// let returnData = data.sort((a, b) => {
-//   let aa = a.date.split("/").reverse().join();
-//   let bb = b.date.split("/").reverse().join();
-//   return aa < bb ? -1 : aa > bb ? 1 : 0;
-// });
-// console.dir(returnData, { maxArrayLength: null });
