@@ -28,7 +28,7 @@ const BarChartComponent = ({ barChartData, barChartLabel }) => {
       },
       title: {
         display: true,
-        text: "Chart.js Bar Chart",
+        text: "Daily Graph",
       },
     },
   };
