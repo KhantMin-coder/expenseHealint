@@ -52,7 +52,6 @@ export const calculateCategoryData = (data) => {
     r[cate] ? r[cate].push(o) : (r[cate] = [o]);
     return r;
   }, {});
-  console.log(categroies);
 
   let categroryData = [];
   for (const key in categroies) {
