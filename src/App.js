@@ -22,10 +22,11 @@ function App() {
 
   // to test with dummy data,uncomment the following line and delete old local storage
   // localstorage data will be replaced with dummy data
-  // IMPORTANT: localstorge data are generated randomly from mockaroo and are not formatted via date for table
+  // IMPORTANT: localstorge data are generated randomly from Mockaroo 
   
-  // const [data, setData] = useLocalStorage("expenses", dummyData);
-  const [data, setData] = useLocalStorage("expenses", []);
+  // NOTE: useLocalStorage hook is used to store data in localstorage
+  const [data, setData] = useLocalStorage("expenses", dummyData);
+  // const [data, setData] = useLocalStorage("expenses", []);
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -86,12 +87,15 @@ function App() {
 
   return (
     <div className="App">
+      {/* Modals */}
       <Modal isOpen={isOpenDeleteModal} setIsOpen={setIsOpenDeleteModal}>
         <DeleteExpenseForm data={selectedData} handleDelete={handleDelete} />
       </Modal>
       <Modal isOpen={isOpenEditModal} setIsOpen={setIsOpenEditModal}>
         <EditExpenseForm data={selectedData} handleEdit={handleEdit} />
       </Modal>
+
+      {/* container */}
       <div className="container">
         <div className="grid">
           <div className="grid-item grid-item-1">
