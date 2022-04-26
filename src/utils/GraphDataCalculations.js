@@ -111,7 +111,7 @@ export const calculateLast7DaysData = (data) => {
 
   let barChartLabel = [];
   let barChartData = [];
-  for (let i = 0; i < lastWeekGroups.length; i++) {
+  for (let i = lastWeekGroups.length - 1; i > -1 ; i--) {
     barChartLabel.push(lastWeekGroups[i].displayDate);
     barChartData.push(lastWeekGroups[i].total);
   }
