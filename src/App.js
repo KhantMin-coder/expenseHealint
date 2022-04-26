@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 import { data as dummyData } from "./assets/dummy";
 
-
 import ExpenseForm from "./components/Forms/ExpenseForm";
 import Table from "./components/Table";
 import Modal from "./components/Modal";
@@ -20,7 +19,14 @@ import EditExpenseForm from "./components/Forms/EditExpenseForm";
 import { useLocalStorage } from "./hooks/UseLocalStorage";
 
 function App() {
-  const [data, setData] = useLocalStorage("expenses", dummyData);
+
+  // to test with dummy data,uncomment the following line and delete old local storage
+  // localstorage data will be replaced with dummy data
+  // IMPORTANT: localstorge data are generated randomly from mockaroo and are not formatted via date for table
+  
+  // const [data, setData] = useLocalStorage("expenses", dummyData);
+  const [data, setData] = useLocalStorage("expenses", []);
+
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [selectedData, setSelectedData] = useState({});
@@ -77,7 +83,6 @@ function App() {
     setData(newData);
     setIsOpenEditModal(false);
   };
-
 
   return (
     <div className="App">

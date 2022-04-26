@@ -89,7 +89,7 @@ const EditExpenseForm = ({ data, handleEdit }) => {
           <div className="errorText">{formik.errors.category}</div>
         ) : null}
         <button className="editExpForm-button" type="submit">
-          Edit Expense
+          Update Expense
         </button>
       </form>
     </div>

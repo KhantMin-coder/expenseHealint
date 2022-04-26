@@ -17,9 +17,9 @@ const possibleMonthStrings = [
 
 // Calculate Monthly Data Graph
 export const calculateMonthlyData = (data) => {
-  let monthGroup = data.reduce(function (r, o) {
-    var m = o.date.split("/")[1];
-    r[m] ? r[m].push(o) : (r[m] = []);
+  let monthGroup = data.reduce(function (r, obj) {
+    var month = obj.date.split("/")[1];
+    r[month] ? r[month].push(obj) : (r[month] = [obj]);
     return r;
   }, {});
 
@@ -49,9 +49,10 @@ export const calculateMonthlyData = (data) => {
 export const calculateCategoryData = (data) => {
   let categroies = data.reduce(function (r, o) {
     var cate = o.category;
-    r[cate] ? r[cate].push(o) : (r[cate] = []);
+    r[cate] ? r[cate].push(o) : (r[cate] = [o]);
     return r;
   }, {});
+  console.log(categroies);
 
   let categroryData = [];
   for (const key in categroies) {
@@ -111,11 +112,10 @@ export const calculateLast7DaysData = (data) => {
 
   let barChartLabel = [];
   let barChartData = [];
-  for (let i = lastWeekGroups.length - 1; i > -1 ; i--) {
+  for (let i = lastWeekGroups.length - 1; i > -1; i--) {
     barChartLabel.push(lastWeekGroups[i].displayDate);
     barChartData.push(lastWeekGroups[i].total);
   }
 
-  console.log(barChartData, barChartLabel);
   return { barChartLabel, barChartData };
 };
