@@ -15,11 +15,14 @@ import {
   calculateLast7DaysData,
 } from "./utils/GraphDataCalculations";
 import DeleteExpenseForm from "./components/Forms/DeleteExpenseForm";
+import EditExpenseForm from "./components/Forms/EditExpenseForm";
+import { useLocalStorage } from "./hooks/UseLocalStorage";
 
 function App() {
-  const [data, setData] = useState(dummyData);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [deleteModalData, setDeleteModalData] = useState({});
+  const [data, setData] = useLocalStorage("expenses", dummyData);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
 
   const [lineChartLabels, setLineChartLabels] = useState([]);
   const [lineChartData, setLineChartData] = useState([]);
@@ -48,20 +51,39 @@ function App() {
   }, [data]);
 
   const showDeleteOperation = (expense) => {
-    setDeleteModalData(expense);
-    setIsOpenModal(true);
+    setSelectedData(expense);
+    setIsOpenDeleteModal(true);
+  };
+
+  const showEditOperation = (expense) => {
+    setSelectedData(expense);
+    setIsOpenEditModal(true);
   };
 
   const handleDelete = () => {
-    const newData = data.filter((expense) => expense.id !== deleteModalData.id);
+    const newData = data.filter((expense) => expense.id !== selectedData.id);
     setData(newData);
-    setIsOpenModal(false);
+    setIsOpenDeleteModal(false);
+  };
+
+  const handleEdit = (passedData) => {
+    const newData = data.map((expense) => {
+      if (expense.id === passedData.id) {
+        return passedData;
+      }
+      return expense;
+    });
+    setData(newData);
+    setIsOpenEditModal(false);
   };
 
   return (
     <div className="App">
-      <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal}>
-        <DeleteExpenseForm data={deleteModalData} handleDelete={handleDelete} />
+      <Modal isOpen={isOpenDeleteModal} setIsOpen={setIsOpenDeleteModal}>
+        <DeleteExpenseForm data={selectedData} handleDelete={handleDelete} />
+      </Modal>
+      <Modal isOpen={isOpenEditModal} setIsOpen={setIsOpenEditModal}>
+        <EditExpenseForm data={selectedData} handleEdit={handleEdit} />
       </Modal>
       <div className="container">
         <div className="grid">
@@ -95,7 +117,11 @@ function App() {
           </div>
           <div className="grid-item grid-item-5">
             <h4>Expense Table</h4>
-            <Table TD={data} showDeleteOperation={showDeleteOperation} />
+            <Table
+              TD={data}
+              showDeleteOperation={showDeleteOperation}
+              showEditOperation={showEditOperation}
+            />
           </div>
         </div>
       </div>

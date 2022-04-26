@@ -1,11 +1,13 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Table.scss";
 import Pagination from "../components/Pagination";
 
-const Table = ({ TD, showDeleteOperation }) => {
+const Table = ({ TD, showDeleteOperation, showEditOperation }) => {
   let [tableData, setTableData] = useState(TD.slice(0).reverse());
   let [currentTableData, setcurrentTableData] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
+
+  console.log('rendering table');
 
   useEffect(() => {
     // Reverse the data to show the latest data
@@ -30,7 +32,7 @@ const Table = ({ TD, showDeleteOperation }) => {
             <th>Operations</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="table-body">
           {currentTableData.map((expenses, index) => {
             return (
               <tr key={expenses.id}>
@@ -39,7 +41,9 @@ const Table = ({ TD, showDeleteOperation }) => {
                 <td>{expenses.expense}</td>
                 <td>{expenses.category}</td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={() => showEditOperation(expenses)}>
+                    Edit
+                  </button>
                   <button onClick={() => showDeleteOperation(expenses)}>
                     Delete
                   </button>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useLocalStorage = (key, initalVal) => {
+export const useLocalStorage = (key, initalVal) => {
   // make pece of state,base of inital Value in localstorage
   const [val, setVal] = useState(() => {
     try {

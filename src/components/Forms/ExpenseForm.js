@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import * as Yup from "yup";
 
-const ExpenseSchema = Yup.object().shape({
+export const ExpenseSchema = Yup.object().shape({
   expenseName: Yup.string()
     .min(3, "Too Short!")
     .max(30, "Too Long!")
@@ -12,7 +12,7 @@ const ExpenseSchema = Yup.object().shape({
   amount: Yup.number().min(1).required("Expense Amount is required"),
   category: Yup.string()
     .oneOf(
-      ["Food", "Utilities", "Entertainment", "Donations", "Others"],
+      ["Food", "Utilities", "Entertainment", "Donation", "Others"],
       "Invalid Category Type"
     )
     .required("Required"),
@@ -94,8 +94,8 @@ const ExpenseForm = ({ data, setData }) => {
         <option value="Entertainment" label="Entertainment">
           Entertainment
         </option>
-        <option value="Donations" label="Donations">
-          Donations
+        <option value="Donation" label="Donation">
+          Donation
         </option>
         <option value="Others" label="Others">
           Others

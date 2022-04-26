@@ -1,4 +1,12 @@
+@use "../styles/colors" as *;
+
 .table {
   width: 100%;
   height: 500px;
+
+  &-body {
+    tr:nth-of-type(even) {
+      background-color: $backgroundColor;
+    }
+  }
 }

@@ -1,0 +1,50 @@
+@use "../../styles/colors" as *;
+
+.editExpForm {
+  width: 340px;
+
+  &-label {
+    margin-bottom: 12px;
+    color: "red";
+  }
+
+  &-button {
+    width: 90%;
+    height: 40px;
+    padding: 0 12px;
+    background-color: $thirtaryColor;
+    border: 1px solid $thirtaryColor;
+    color: white;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: $thirtaryColorDarken;
+    }
+  }
+
+  &-field {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 16px;
+    padding: 0 12px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    transition: all 275ms;
+    display: block;
+
+    &:focus {
+      border-color: grey;
+    }
+
+    &::placeholder {
+      color: #eeeeee;
+    }
+  }
+}
