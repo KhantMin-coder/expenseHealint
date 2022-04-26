@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 import { data as dummyData } from "./assets/dummy";
 
+
 import ExpenseForm from "./components/Forms/ExpenseForm";
 import Table from "./components/Table";
 import Modal from "./components/Modal";
@@ -76,6 +77,7 @@ function App() {
     setData(newData);
     setIsOpenEditModal(false);
   };
+
 
   return (
     <div className="App">

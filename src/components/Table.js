@@ -7,7 +7,6 @@ const Table = ({ TD, showDeleteOperation, showEditOperation }) => {
   let [currentTableData, setcurrentTableData] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
 
-  console.log('rendering table');
 
   useEffect(() => {
     // Reverse the data to show the latest data
@@ -29,6 +28,7 @@ const Table = ({ TD, showDeleteOperation, showEditOperation }) => {
             <th>Expense Name</th>
             <th>Expense</th>
             <th>Category</th>
+            <th>Date Created</th>
             <th>Operations</th>
           </tr>
         </thead>
@@ -39,12 +39,13 @@ const Table = ({ TD, showDeleteOperation, showEditOperation }) => {
                 <td>{expenses.id}</td>
                 <td>{expenses.expenseName}</td>
                 <td>{expenses.expense}</td>
+                <td>{expenses.date}</td>
                 <td>{expenses.category}</td>
                 <td>
-                  <button onClick={() => showEditOperation(expenses)}>
+                  <button className="table-editButton" onClick={() => showEditOperation(expenses)}>
                     Edit
                   </button>
-                  <button onClick={() => showDeleteOperation(expenses)}>
+                  <button className="table-deleteButton" onClick={() => showDeleteOperation(expenses)}>
                     Delete
                   </button>
                 </td>
