@@ -19,7 +19,10 @@ const possibleMonthStrings = [
 export const calculateMonthlyData = (data) => {
   let monthGroup = data.reduce(function (r, obj) {
     var month = obj.date.split("/")[1];
-    r[month] ? r[month].push(obj) : (r[month] = [obj]);
+    var year = obj.date.split("/")[2];
+    if (year === "2022") {
+      r[month] ? r[month].push(obj) : (r[month] = [obj]);
+    }
     return r;
   }, {});
 
@@ -49,7 +52,10 @@ export const calculateMonthlyData = (data) => {
 export const calculateCategoryData = (data) => {
   let categroies = data.reduce(function (r, o) {
     var cate = o.category;
-    r[cate] ? r[cate].push(o) : (r[cate] = [o]);
+    let year = o.date.split("/")[2];
+    if (year === "2022") {
+      r[cate] ? r[cate].push(o) : (r[cate] = [o]);
+    }
     return r;
   }, {});
 

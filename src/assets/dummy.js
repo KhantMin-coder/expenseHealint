@@ -1,17 +1,17 @@
 export const data = [
   {
     id: 1,
-    expense: 473,
-    expenseName: "Voyatouch",
+    expense: 100000,
+    expenseName: "Not Supported Date",
     category: "Utilities",
-    date: "01/01/2022",
+    date: "01/12/2021",
   },
   {
     id: 2,
-    expense: 416,
-    expenseName: "Otcom",
+    expense: 300000,
+    expenseName: "Not Supported Date",
     category: "Others",
-    date: "01/01/2022",
+    date: "01/01/2021",
   },
   {
     id: 3,
@@ -2171,4 +2171,3 @@ export const data = [
   },
 ];
 
-console.log(data.length);
