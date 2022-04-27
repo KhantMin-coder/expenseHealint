@@ -16,11 +16,11 @@ const possibleMonthStrings = [
 ];
 
 // Calculate Monthly Data Graph
-export const calculateMonthlyData = (data) => {
+export const calculateMonthlyData = (data, yearSelected) => {
   let monthGroup = data.reduce(function (r, obj) {
     var month = obj.date.split("/")[1];
     var year = obj.date.split("/")[2];
-    if (year === "2022") {
+    if (year === `${yearSelected}`) {
       r[month] ? r[month].push(obj) : (r[month] = [obj]);
     }
     return r;
@@ -49,11 +49,11 @@ export const calculateMonthlyData = (data) => {
 };
 
 // Calculate Category Data Graph
-export const calculateCategoryData = (data) => {
+export const calculateCategoryData = (data, yearSelected) => {
   let categroies = data.reduce(function (r, o) {
     var cate = o.category;
     let year = o.date.split("/")[2];
-    if (year === "2022") {
+    if (year === `${yearSelected}`) {
       r[cate] ? r[cate].push(o) : (r[cate] = [o]);
     }
     return r;

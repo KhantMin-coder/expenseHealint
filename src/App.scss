@@ -28,28 +28,32 @@ body {
       text-align: center;
 
       &-1 {
-        grid-column: 1 / span 6;
-        grid-row: 1 / span 3;
+        grid-column: 1 / span 10;
       }
 
       &-2 {
-        grid-column: 1 / span 4;
-        grid-row: 1 / span 3;
-        grid-column-start: 7;
+        grid-column: 1 / span 6;
+        grid-row: 2 / span 3;
       }
 
       &-3 {
+        grid-column: 1 / span 4;
+        grid-row: 2 / span 3;
+        grid-column-start: 7;
+      }
+
+      &-4 {
         grid-row-start: 4;
         grid-column: 1 / span 3;
         grid-row: span 3;
       }
 
-      &-4 {
+      &-5 {
         grid-column: 4 / span 7;
         grid-row: span 3;
       }
 
-      &-5 {
+      &-6 {
         grid-column: span 10;
       }
     }
@@ -63,23 +67,23 @@ body {
       grid-template-columns: repeat(10, minmax(50px, 1fr));
 
       .grid-item {
-        &-1 {
-          grid-column: 1 / span 10;
-        }
-
         &-2 {
-          grid-row: 7 / span 3;
-          grid-column: 5 / span 6;
+          grid-column: 1 / span 10;
         }
 
         &-3 {
-          grid-row: 7 / span 3;
-          grid-column: 1 / span 4;
+          grid-row: 5 / span 3;
+          grid-column: 5 / span 6;
         }
 
         &-4 {
+          grid-row: 5 / span 3;
+          grid-column: 1 / span 4;
+        }
+
+        &-5 {
           grid-column: 1 / span 10;
-          grid-row: span 3;
+          grid-row: 8 / span 3;
         }
       }
     }
@@ -93,23 +97,23 @@ body {
       grid-template-columns: repeat(10, minmax(40px, 1fr));
 
       .grid-item {
-        &-1 {
-          grid-column: 1 / span 10;
-        }
-
         &-2 {
-          grid-row: 7 / span 3;
           grid-column: 1 / span 10;
         }
 
         &-3 {
-          grid-row: 10 / span 3;
+          grid-row: 5 / span 3;
           grid-column: 1 / span 10;
         }
 
         &-4 {
+          grid-row: 11 / span 3;
           grid-column: 1 / span 10;
-          grid-row: span 3;
+        }
+
+        &-5 {
+          grid-column: 1 / span 10;
+          grid-row: 8 / span 3;
         }
       }
     }
