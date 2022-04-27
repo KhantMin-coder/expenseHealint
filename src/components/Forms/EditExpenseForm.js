@@ -64,7 +64,7 @@ const EditExpenseForm = ({ data, handleEdit }) => {
           value={formik.values.category}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          style={{ width: "80%", marginBottom: "20px", height: "50px" }}
+          className='editExpForm-select'
         >
           <option value="" label="Select a category">
             Select a category
