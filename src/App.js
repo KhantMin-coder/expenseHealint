@@ -111,10 +111,16 @@ function App() {
           <div className="grid-item grid-item-1">
             <div className="grid-item-1-content">
               <h4>Select Year To Filter</h4>
-              <select onChange={(e) => setCurrentYear(e.target.value)}>
-                <option selected disabled hidden value="">
-                  Select Year
-                </option>
+              <p>
+                Selecting year will only work on{" "}
+                <strong>monthly data graph</strong> and{" "}
+                <strong>expense category graph</strong>
+              </p>
+              <select
+                defaultValue={currentYear}
+                onChange={(e) => setCurrentYear(e.target.value)}
+              >
+                <option hidden>Select Year</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>

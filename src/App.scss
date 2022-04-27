@@ -4,6 +4,10 @@ body {
   background-color: $backgroundColor;
 }
 
+strong{
+  color: $secondaryColor;
+}
+
 .container {
   max-width: 1100px;
   height: 100%;
